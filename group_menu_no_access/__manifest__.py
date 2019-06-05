@@ -18,10 +18,9 @@
 #
 ##############################################################################
 
-
 {
     'name': 'Group Menu No Access',
-    'version': '0.1',
+    'version': '12.0.1.0.0',
     "category": "Access",
     'author': 'Cesar Lage',
     'depends': ['base'],
