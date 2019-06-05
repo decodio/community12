@@ -29,5 +29,5 @@
     'data': [
         'views/groups.xml'
     ],
-    'installable': False
+    'installable': True
 }
