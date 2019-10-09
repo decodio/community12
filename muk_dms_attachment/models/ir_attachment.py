@@ -1,21 +1,22 @@
 ###################################################################################
-# 
-#    MuK Document Management System
 #
-#    Copyright (C) 2018 MuK IT GmbH
+#    Copyright (c) 2017-2019 MuK IT GmbH.
+#
+#    This file is part of MuK Documents Attachment 
+#    (see https://mukit.at).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#    it under the terms of the GNU Lesser General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU Lesser General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#    You should have received a copy of the GNU Lesser General Public License
+#    along with this program. If not, see <http://www.gnu.org/licenses/>.
 #
 ###################################################################################
 
@@ -128,16 +129,16 @@ class DocumentIrAttachment(models.Model):
                 '&', ('is_store_document_link', '=', False),
                 '|', ('res_field', '=', False), ('res_field', '!=', False)
             ]
-            self.search(record_domain).migrate()
+            self.search(record_domain).migrate(batch_size=100)
             return True
     
     @api.multi
-    def migrate(self):
+    def migrate(self, batch_size=None):
         if self._storage() != 'document':
             self.with_context(migration=True).write({
                 'is_store_document_link': False
             })
-        return super(DocumentIrAttachment, self).migrate()
+        return super(DocumentIrAttachment, self).migrate(batch_size=batch_size)
     
     #----------------------------------------------------------
     # Read
