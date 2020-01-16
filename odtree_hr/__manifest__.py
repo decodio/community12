@@ -5,7 +5,7 @@
     'name': 'Odoo Employee Tree',
     'version': '1.0',
     'category': 'OdTree',
-    'sequence': 14,
+    'sequence': 54,
     'license':'LGPL-3',
     'description': """
     display employees in a department tree
