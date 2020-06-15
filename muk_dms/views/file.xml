@@ -82,7 +82,7 @@
 								        <a t-if="record.permission_write.raw_value and !record.is_locked.raw_value" role="menuitem" name="lock" type="object" class="dropdown-item">
 											<i class="fa fa-lock" /> Lock
 										</a>
-								        <a t-if="record.is_locked.raw_value  and record.is_lock_editor.raw_value" role="menuitem" name="lock" type="object" class="dropdown-item">
+								        <a t-if="record.permission_write.raw_value and record.is_locked.raw_value  and record.is_lock_editor.raw_value" role="menuitem" name="unlock" type="object" class="dropdown-item">
 											<i class="fa fa-unlock-alt" /> Unlock
 										</a>
 								        <a t-if="record.permission_write.raw_value and record.active.raw_value" role="menuitem" name="toggle_active" type="object" class="dropdown-item">
@@ -149,8 +149,8 @@
 				</t>
 			</templates>
             <searchpanel>
-                <field name="directory" icon="fa-folder"/>
-                <field name="directory" string="Starred"  domain="[['starred', '=', True]]" select="multi" icon="fa-star"/>
+                <field name="directory" domain="[['is_hidden', '=', False]]" icon="fa-folder"/>
+                <field name="directory" string="Starred"  domain="[['is_hidden', '=', False], ['starred', '=', True]]" select="multi" icon="fa-star"/>
                 <field name="tags" select="multi" icon="fa-tag" groupby="category" />
             </searchpanel>
 		</kanban>
@@ -209,6 +209,9 @@
 				<button class="oe_highlight" name="unlock" type="object" string="Unlock"
 					attrs="{'invisible':['|',('is_locked', '=', False),('is_lock_editor', '=', False)]}" />
 			</header>
+			<div class="alert alert-warning text-center o_form_header" attrs="{'invisible': [('is_locked', '!=', True)]}" role="status">
+         		<strong>This file is locked!</strong>
+      		</div>
 			<sheet>
 				<div class="oe_button_box" name="button_box">
 					<button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
