@@ -402,8 +402,8 @@ class ReportAerooAbstract(models.AbstractModel):
             'barcode':     barcode,
         }
         self.localcontext.update(ctx)
-        self._set_lang(self.company.partner_id.lang)
         self._set_objects(self.model, docids)
+        self._set_lang(self.company.partner_id.lang)
 
         file_data = None
         if report.tml_source == 'database':
