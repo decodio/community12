@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="assets_backend" name="Backend UI Assets" inherit_id="web.assets_backend">
+        <xpath expr=".">
+            <link rel="stylesheet"
+                  href="/eq_ownerp_ui/static/src/css/navigation-and-icons.scss"
+                  />
+            <link rel="stylesheet"
+                  href="/eq_ownerp_ui/static/src/css/basic_styling.scss"
+                  />
+            <script type="application/javascript"
+                    src="/eq_ownerp_ui/static/src/js/functions.js"
+                    />
+            <script type="application/javascript"
+                    src="/eq_ownerp_ui/static/src/js/widgets.js"
+                    />
+            <script type="application/javascript"
+                    src="/eq_ownerp_ui/static/src/js/form_renderer.js"
+                    />
+            <t t-set="eq_template_colors" t-value="request.env['eq.template.colors']" />
+            <link rel="stylesheet" type="text/scss" t-att-href="eq_template_colors.get_colors()" />
+        </xpath>
+        <xpath expr="script[@src='/web/static/src/js/chrome/menu.js']" position="replace">
+            <script type="text/javascript"
+                    src="/eq_ownerp_ui/static/src/js/menu.js"
+                    />
+        </xpath>
+        <xpath expr="script[@src='/web/static/src/js/chrome/web_client.js']" position="replace">
+            <script type="text/javascript"
+                    src="/eq_ownerp_ui/static/src/js/web_client.js"
+                    />
+        </xpath>
+    </template>
+
+
+
+    <template id="eq_assets_frontend_ui" inherit_id="web.assets_frontend">
+        <xpath expr="link[last()]" position="after">
+            <link rel="stylesheet" type="text/css" href="/eq_ownerp_ui/static/src/css/eq_frontend_web.scss"/>
+        </xpath>
+    </template>
+</odoo>

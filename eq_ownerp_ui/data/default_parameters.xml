@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <function model="ir.config_parameter" name="set_param" eval="('eq_show_sidebar',True)"/>
+        <function model="ir.config_parameter" name="set_param" eval="('eq_show_sidebar_names',True)"/>
+        <function model="ir.config_parameter" name="set_param" eval="('eq_show_notification_right',True)"/>
+    </data>
+</odoo>

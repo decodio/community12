@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<template>
+    <t t-extend="AppsMenu">
+
+        <!-- App icons must be clickable -->
+        <t t-jquery=".o_app" t-operation="attributes">
+            <attribute name="t-attf-href">#menu_id=#{app.menuID}&amp;action_id=#{app.actionID}</attribute>
+            <attribute name="class">dropdown-item o_app col-4 col-xs-4 col-sm-3 col-md-2 col-lg-2 col-xl-1 text-center</attribute>
+        </t>
+
+        <!-- Set new Settings Button -->
+        <t t-jquery="[t-as=app]" t-operation="before">
+            <!-- TODO Joe -->
+            <!--<a href="" class="app-icon-settings d-none d-sm-block"><i class="fa fa-star"></i></a>-->
+        </t>
+
+        <!-- App icons should be more than a text -->
+        <t t-jquery=".o_app &gt; t" t-operation="replace">
+            <t t-call="eq_ownerp_ui.AppIcon"/>
+        </t>
+
+        <!-- Same hotkey as in EE -->
+        <t t-jquery=".full" t-operation="attributes">
+            <attribute name="accesskey">a</attribute>
+        </t>
+
+        <!-- Search bar -->
+        <t t-jquery="[t-as=app]" t-operation="before">
+            <div class="search-container form-row align-items-center mb-4 mt-4 col-12">
+                <button class="btn btn-link" id="eq_close_menu" style="display: none;">
+                    <span class="fa fa-3x fa-times d-none d-md-block"/>
+                    <span class="fa fa-2x fa-times d-md-none"/>
+                </button>
+                <div class="search-input col-12 col-sm-12 col-md-10 col-lg-10 col-xl-8 ml-auto mr-auto mb-2">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">
+                                <i class="fa fa-search"/>
+                            </div>
+                        </div>
+                        <input type="search"
+                               autocomplete="off"
+                               placeholder="Search menus..."
+                               class="form-control"/>
+                    </div>
+                </div>
+                <div class="search-results col-md-10 ml-auto mr-auto"/>
+            </div>
+        </t>
+    </t>
+
+    <!-- Separate app icon template, for easier inheritance -->
+    <t t-name="eq_ownerp_ui.AppIcon">
+        <div class="eq_new_icons">
+            <t t-if="app.xmlID == 'base.menu_administration'"><i class="o-app-icon fa fa-cogs"></i></t>
+            <t t-elif="app.xmlID == 'base.menu_management'"><i class="o-app-icon fa fa-cubes"></i></t>
+            <t t-elif="app.xmlID == 'mail.menu_root_discuss'"><i class="o-app-icon fa fa-comments"></i></t>
+            <t t-elif="app.xmlID == 'mass_mailing.mass_mailing_menu_root'"><i class="o-app-icon fa fa-paper-plane"></i></t>
+            <t t-elif="app.xmlID == 'calendar.mail_menu_calendar'"><i class="o-app-icon fa fa-calendar"></i></t>
+            <t t-elif="app.xmlID == 'note.menu_note_notes'"><i class="o-app-icon fa fa-sticky-note-o"></i></t>
+            <t t-elif="app.xmlID == 'contacts.menu_contacts'"><i class="o-app-icon fa fa-address-book-o"></i></t>
+            <t t-elif="app.xmlID == 'crm.crm_menu_root'"><i class="o-app-icon fa fa-handshake-o"></i></t>
+            <t t-elif="app.xmlID == 'sale.sale_menu_root'"><i class="o-app-icon fa fa-line-chart"></i></t>
+            <t t-elif="app.xmlID == 'website.menu_website_configuration'"><i class="o-app-icon fa fa-globe"></i></t>
+            <t t-elif="app.xmlID == 'point_of_sale.menu_point_root'"><i class="o-app-icon fa fa-money"></i></t>
+            <t t-elif="app.xmlID == 'purchase.menu_purchase_root'"><i class="o-app-icon fa fa-credit-card"></i></t>
+            <t t-elif="app.xmlID == 'stock.menu_stock_root'"><i class="o-app-icon fa fa-cube"></i></t>
+            <t t-elif="app.xmlID == 'utm.menu_link_tracker_root'"><i class="o-app-icon fa fa-link"></i></t>
+            <t t-elif="app.xmlID == 'mrp.menu_mrp_root'"><i class="o-app-icon fa fa-wrench"></i></t>
+            <t t-elif="app.xmlID == 'repair.menu_repair_order'"><i class="o-app-icon fa fa-wrench"></i><i class="o-app-icon fa fa-gear eq-mini-icon-repair"></i></t>
+            <t t-elif="app.xmlID == 'account.menu_finance'"><i class="o-app-icon fa fa-file-o"></i><i class="o-app-icon fa fa-eur eq-mini-icon-invoice"></i></t>
+            <t t-elif="app.xmlID == 'project.menu_main_pm'"><i class="o-app-icon fa fa-puzzle-piece"></i></t>
+            <t t-elif="app.xmlID == 'hr.menu_hr_root'"><i class="o-app-icon fa fa-users"></i></t>
+            <t t-elif="app.xmlID == 'hr_recruitment.menu_hr_recruitment_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-search eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+            <t t-elif="app.xmlID == 'hr_attendance.menu_hr_attendance_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-clock-o eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+            <t t-elif="app.xmlID == 'hr_holidays.menu_hr_holidays_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-sun-o eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+            <t t-elif="app.xmlID == 'hr_expense.menu_hr_expense_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-eur eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+            <t t-elif="app.xmlID == 'hr_payroll.menu_hr_payroll_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-money eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+            <t t-elif="app.xmlID == 'eq_delivery_forecast.main_delivery_forecast_menu'"><i class="o-app-icon fa fa-truck eq-mini-icon-ul-truck fa-flip-horizontal"></i><i class="o-app-icon fa fa-clock-o eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+            <t t-elif="app.xmlID == 'base.menu_board_root'"><i class="o-app-icon fa fa-tachometer"></i></t>
+            <t t-elif="app.xmlID == 'event.event_main_menu'"><i class="o-app-icon fa fa-ticket"></i></t>
+            <t t-elif="app.xmlID == 'hr_timesheet.timesheet_menu_root'"><i class="o-app-icon fa fa-clock-o"></i></t>
+            <t t-elif="app.xmlID == 'lunch.menu_lunch'"><i class="o-app-icon fa fa-cutlery"></i></t>
+            <t t-elif="app.xmlID == 'eq_helpdesk.eq_helpdesk'"><i class="o-app-icon fa fa-question-circle"></i></t>
+            <!-- Fallback -->
+            <t t-else=""><i class="o-app-icon fa fa-certificate"></i></t>
+        </div>
+
+        <div class="eq_old_icons">
+            <img class="o-app-icon" t-attf-src="/web/image/ir.ui.menu/{{ app.menuID }}/web_icon_data"/>
+        </div>
+
+        <span class="o-app-name">
+            <t t-esc="app.name"/><!--<br/><t t-esc="app.xmlID"/>-->
+        </span>
+
+        <!-- Font Awesome Variation
+        <t t-elif="app.xmlID == 'base.menu_management'"><i class="o-app-icon fa fa-cubes"></i></t>
+        Own Icon Variation
+        <t t-if="app.xmlID == 'base.menu_administration'"><img class="o-app-icon clean" t-attf-src="/eq_ownerp_ui/static/src/img/menu_administration.png"/></t> -->
+    </t>
+
+    <!-- A search result -->
+    <t t-name="eq_ownerp_ui.MenuSearchResults">
+        <t t-foreach="results" t-as="result">
+            <t t-set="menu" t-value="widget._menuInfo(result.original)"/>
+            <a t-attf-class="o-menu-search-result dropdown-item col-12 ml-auto mr-auto #{result_first ? 'active' : ''}"
+                 t-attf-href="#menu_id=#{menu.id}&amp;action_id=#{menu.action_id}"
+                 t-att-data-menu-id="menu.id"
+                 t-att-data-action-id="menu.action_id"
+                 t-att-data-parent-id="menu.parent_id[0]"
+                 t-raw="result.string"/>
+            <!-- removing to clear the background-image of search groups
+            t-attf-style="background-image:url('data:image/png;base64,#{menu.web_icon_data}')"-->
+        </t>
+    </t>
+
+
+
+
+
+
+
+
+    <!-- overwrite the Settings Sidebar on General Settings -->
+    <t t-extend="BaseSetting.Tabs">
+        <t t-jquery="[t-as=tab]" t-operation="replace">
+            <t t-foreach="tabItems" t-as="tab">
+                <div class="eq_new_icons">
+                    <div class="tab" t-attf-data-key="#{tab.key}" role="tab">
+                        <div class="eq-mini-sidebar-icon">
+                            <t t-if="tab.key == 'general_settings'"><i class="o-app-icon fa fa-cogs"></i></t>
+                            <!--<t t-elif="tab.key == 'base.menu_management'"><i class="o-app-icon fa fa-cubes"></i></t>
+                            <t t-elif="tab.key == 'mail.menu_root_discuss'"><i class="o-app-icon fa fa-comments"></i></t>-->
+                            <t t-elif="tab.key == 'mass_mailing'"><i class="o-app-icon fa fa-paper-plane"></i></t>
+                            <!--<t t-elif="tab.key == 'calendar.mail_menu_calendar'"><i class="o-app-icon fa fa-calendar"></i></t>
+                            <t t-elif="tab.key == 'note.menu_note_notes'"><i class="o-app-icon fa fa-sticky-note-o"></i></t>
+                            <t t-elif="tab.key == 'contacts.menu_contacts'"><i class="o-app-icon fa fa-address-book-o"></i></t>-->
+                            <t t-elif="tab.key == 'crm'"><i class="o-app-icon fa fa-handshake-o"></i></t>
+                            <t t-elif="tab.key == 'sale_management'"><i class="o-app-icon fa fa-line-chart"></i></t>
+                            <t t-elif="tab.key == 'website'"><i class="o-app-icon fa fa-globe"></i></t>
+                            <t t-elif="tab.key == 'point_of_sale'"><i class="o-app-icon fa fa-money"></i></t>
+                            <t t-elif="tab.key == 'purchase'"><i class="o-app-icon fa fa-credit-card"></i></t>
+                            <t t-elif="tab.key == 'stock'"><i class="o-app-icon fa fa-cube"></i></t>
+                            <!--<t t-elif="tab.key == 'utm.menu_link_tracker_root'"><i class="o-app-icon fa fa-link"></i></t>-->
+                            <t t-elif="tab.key == 'mrp'"><i class="o-app-icon fa fa-wrench"></i></t>
+                            <!--<t t-elif="tab.key == 'repair.menu_repair_order'"><i class="o-app-icon fa fa-wrench"></i><i class="o-app-icon fa fa-gear eq-mini-icon-repair"></i></t>-->
+                            <t t-elif="tab.key == 'account'"><i class="o-app-icon fa fa-eur"></i></t>
+                            <t t-elif="tab.key == 'project'"><i class="o-app-icon fa fa-puzzle-piece"></i></t>
+                            <t t-elif="tab.key == 'hr'"><i class="o-app-icon fa fa-users"></i></t>
+                            <t t-elif="tab.key == 'hr_recruitment'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-search eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+                            <t t-elif="tab.key == 'hr_attendance'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-clock-o eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+                            <t t-elif="tab.key == 'eq_public_holidays'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-sun-o eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+                            <t t-elif="tab.key == 'hr_expense'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-eur eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+                            <t t-elif="tab.key == 'hr_payroll'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user"></i><i class="o-app-icon fa fa-money eq-mini-icon-or-icon"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder"></i></t>
+                            <!--<t t-elif="tab.key == 'base.menu_board_root'"><i class="o-app-icon fa fa-tachometer"></i></t>-->
+                            <t t-elif="tab.key == 'event'"><i class="o-app-icon fa fa-ticket"></i></t>
+                            <t t-elif="tab.key == 'hr_timesheet'"><i class="o-app-icon fa fa-clock-o"></i></t>
+                            <!--<t t-elif="tab.key == 'lunch.menu_lunch'"><i class="o-app-icon fa fa-cutlery"></i></t>-->
+                            <t t-elif="tab.key == 'knowledge'"><i class="o-app-icon fa fa-file-o"></i></t>
+                            <!-- Fallback -->
+                            <t t-else=""><i class="o-app-icon fa fa-certificate"></i></t>
+                        </div>
+                        <!--<span t-esc="tab.key" style="color:red!important;"></span>-->
+                        <span class="app_name"><t t-esc="tab.string"/></span>
+                    </div>
+                </div>
+                <div class="eq_old_icons">
+                    <div class="tab" t-attf-data-key="#{tab.key}" role="tab">
+                        <div class="icon d-none d-md-block" t-attf-style="background : url('#{imgurl}') no-repeat center;background-size:contain;"/>
+                        <span class="app_name"><t t-esc="tab.string"/></span>
+                    </div>
+                </div>
+
+
+            </t>
+        </t>
+    </t>
+
+</template>
