@@ -1,0 +1,1 @@
+from . import eq_template_colors

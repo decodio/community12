@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <template id="app_sidebar" inherit_id="web.webclient_bootstrap" name="Apps Sidebar">
+        <xpath expr="//div[hasclass('o_main')]//main[hasclass('o_main_content')]" position="before">
+            <div id="app-sidebar" class="app-sidebar-panel">
+                <div class="app-sidebar navbar-collapse"><!--collapse-->
+                    <ul id="sidebar" class="app-sidebar-menu">
+                        <li class="nav-item"  t-as="menu" t-foreach="menu_data['children']" >
+                            <t t-set="debug_param" t-value="'?&amp;debug=' if debug else ''"/>
+                            <a role="menuitem"
+                               t-att-class="'nav-link nav-toggle' if menu.get('children') else 'nav-link '"
+                               t-att-data-menu="menu['id']"
+                               t-att-data-menu-xmlid="menu.get('xmlid')"
+                               t-att-data-action-model="menu['action'] and menu['action'].split(',')[0] or None"
+                               t-att-data-action-id="menu['action'] and menu['action'].split(',')[1] or None"
+                                t-att-href="'/web%s#menu_id=%s&amp;action=%s' % (debug_param, menu['id'], menu['action'] and menu['action'].split(',')[1] or '')">
+
+                                <div class="eq_old_icons">
+                                    <img t-attf-src="/web/image/ir.ui.menu/{{ menu['id'] }}/web_icon_data" t-att-alt="menu['name']" class="app-sidebar-menuitem" t-att-title="menu['name']"/>
+                                </div>
+
+                                <div class="eq_new_icons">
+                                    <t t-if="menu.get('xmlid') == 'base.menu_administration'"><i class="o-app-icon fa fa-cogs" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'base.menu_management'"><i class="o-app-icon fa fa-cubes" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'mail.menu_root_discuss'"><i class="o-app-icon fa fa-comments" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'mass_mailing.mass_mailing_menu_root'"><i class="o-app-icon fa fa-paper-plane" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'calendar.mail_menu_calendar'"><i class="o-app-icon fa fa-calendar" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'note.menu_note_notes'"><i class="o-app-icon fa fa-sticky-note-o" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'contacts.menu_contacts'"><i class="o-app-icon fa fa-address-book-o" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'crm.crm_menu_root'"><i class="o-app-icon fa fa-handshake-o" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'sale.sale_menu_root'"><i class="o-app-icon fa fa-line-chart" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'website.menu_website_configuration'"><i class="o-app-icon fa fa-globe" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'point_of_sale.menu_point_root'"><i class="o-app-icon fa fa-money" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'purchase.menu_purchase_root'"><i class="o-app-icon fa fa-credit-card" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'stock.menu_stock_root'"><i class="o-app-icon fa fa-cube" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'utm.menu_link_tracker_root'"><i class="o-app-icon fa fa-link" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'mrp.menu_mrp_root'"><i class="o-app-icon fa fa-wrench" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'repair.menu_repair_order'"><i class="o-app-icon fa fa-wrench" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-gear eq-mini-icon-repair" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'account.menu_finance'"><i class="o-app-icon fa fa-file-o" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-eur eq-mini-icon-invoice" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'project.menu_main_pm'"><i class="o-app-icon fa fa-puzzle-piece" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr.menu_hr_root'"><i class="o-app-icon fa fa-users" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr_recruitment.menu_hr_recruitment_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-search eq-mini-icon-or-icon" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr_attendance.menu_hr_attendance_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-clock-o eq-mini-icon-or-icon" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr_holidays.menu_hr_holidays_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-sun-o eq-mini-icon-or-icon" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr_expense.menu_hr_expense_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-eur eq-mini-icon-or-icon" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr_payroll.menu_hr_payroll_root'"><i class="o-app-icon fa fa-user eq-mini-icon-ul-user" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-money eq-mini-icon-or-icon" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'base.menu_board_root'"><i class="o-app-icon fa fa-tachometer" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'event.event_main_menu'"><i class="o-app-icon fa fa-ticket" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'hr_timesheet.timesheet_menu_root'"><i class="o-app-icon fa fa-clock-o" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'lunch.menu_lunch'"><i class="o-app-icon fa fa-cutlery" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'eq_delivery_forecast.main_delivery_forecast_menu'"><i class="o-app-icon fa fa-truck eq-mini-icon-ul-user fa-flip-horizontal" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-clock-o eq-mini-icon-or-icon" t-att-alt="menu['name']" t-att-title="menu['name']"></i><i class="o-app-icon fa fa-certificate eq-mini-icon-placeholder" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-elif="menu.get('xmlid') == 'eq_helpdesk.eq_helpdesk'"><i class="o-app-icon fa fa-question-circle" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                    <t t-else=""><i class="o-app-icon fa fa-certificate" t-att-alt="menu['name']" t-att-title="menu['name']"></i></t>
+                                </div>
+                                <span class="eq_sidebar_title">
+                                    <t t-esc="menu['name']"/>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
