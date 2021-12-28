@@ -1,0 +1,273 @@
+.o_main_navbar .o_menu_apps .dropdown-menu.show {
+    position: fixed;
+    top: 0px;
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /*for better scroll behaviour on mobile devices*/
+}
+
+.o_menu_apps .dropdown-menu a.o_app img {
+    height: 100%;
+    width: 100%;
+    max-width: 6rem;
+    max-height: 6rem;
+    object-fit: contain;
+    object-position: center;
+
+    /*-webkit-filter: grayscale(100%);
+    filter: grayscale(100%);*/
+}
+.o_menu_apps .dropdown-menu a.o_app i {
+    font-size: 5rem;
+    vertical-align: middle;
+}
+
+a.o_app span {
+    width: 100%;
+    text-align: center;
+    float:left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.o_menu_apps .dropdown-menu .dropdown-item.o_app {
+    display:inline-block;
+    margin-top:10px;
+    margin-left:-3px;
+    margin-right:-3px;
+}
+.o_menu_apps .dropdown-menu .dropdown-item.o_app:last-child { /*Adding extra space at bottom to the last child, so navigation on iphone-browsers dont overlay lowest row */
+    margin-bottom:7rem;
+}
+.o_menu_apps .app-icon-settings {
+    top: 10px;
+    right: 15px;
+    position: absolute;
+    z-index: 10000;
+}
+.o_menu_apps .app-icon-settings i {
+    font-size:20px;
+}
+
+
+.o_menu_apps a.o_app img.clean {
+    padding:0.5rem;
+}
+
+
+/*.o_menu_apps a.o_app[data-menu-xmlid="base.menu_administration"] img {
+   border:2px solid red;
+
+    width:200px;
+  height:200px;
+  box-sizing:border-box;
+
+  background: url(https://www.ownerp.com/web/image/1780/frohe-weihnachten.jpg) left top no-repeat;
+
+    padding-left: 20px;
+    background-size: contain;
+}
+*/
+
+
+
+/* -----------------------------------------------------------------------
+Following are just for icon specifications--------------------------------
+ -------------------------------------------------------------------------  */
+
+i.eq-mini-icon-placeholder { /*This Placeholder is important to achieve the same height as all other App Buttons */
+    display: inline-block;
+    position: relative;
+    color:white!important;
+    width:0px;
+    visibility: hidden;
+}
+
+i.eq-mini-icon-repair {
+    display: block;
+    position: absolute;
+    top: 50%;
+
+    margin: auto;
+    width: 100%;
+    /*text-shadow: -2px -2px 5px #fff;*/
+    font-size: 2rem !important;
+}
+i.eq-mini-icon-invoice {
+    display: block;
+    position: absolute;
+    margin: auto;
+    width: 100%;
+    font-size: 2.5rem !important;
+    top: 26%;
+    left: -1%;
+    height: 100%;
+}
+i.eq-mini-icon-or-icon {
+    display: block;
+    position: absolute;
+    font-size: 3rem !important;
+    top: 0px;
+    right: 20%;
+}
+i.eq-mini-icon-ul-user {
+    width: 100%;
+    font-size: 4rem !important;
+    margin-top: 0.25rem;
+    /*margin-left: -20%;*/
+}
+i.eq-mini-icon-ul-truck {
+    width: 100%;
+    font-size: 4rem !important;
+    margin-top: 1rem;
+    /*margin-left: -20%;*/
+}
+
+
+/* -----------------------------------------------------------------------
+Following are just for left app-sidebar-----------------------------------
+ -------------------------------------------------------------------------  */
+
+/* Fixing Scroll-Trigger-Size Problem when left sidebar is not full of icons for full frame to enable or disable scrollbar*/
+.app-sidebar-panel {
+    overflow-y: auto;
+    -ms-flex: 0 0 62px;
+    -moz-flex: 0 0 62px;
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 62px;
+    flex: 0 0 62px;
+}
+
+.app-sidebar {
+    white-space: nowrap;
+    padding: 0;
+    .app-sidebar-menu {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	>li {
+	    display: block;
+	    margin: 0;
+	    padding: 0;
+	    border: 0px;
+	    >a {
+            display: block;
+            position: relative;
+            margin: 0;
+            border: 0px;
+            padding: 4px 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 300;
+            /*color: @gray-lighter;*/
+            overflow: hidden;
+            text-overflow: ellipsis;
+	    }
+	}
+        > li:hover > a{
+    	    /*background: darken(@odoo-brand-primary, 15%);*/
+    	    color: #fff;
+        }
+    }
+}
+
+.app-sidebar-menuitem {
+    width: 100%;
+}
+
+#sidebar .eq_new_icons,
+div.tab {
+    text-align: center;
+
+    i.o-app-icon {
+        font-size: 2rem;
+    }
+    i.eq-mini-icon-or-icon {
+        /*display: block;
+        position: absolute;
+        font-size: 1rem !important;
+        top: 0px;
+        right: 20%;*/
+
+        position: absolute;
+        font-size: 1rem !important;
+        top: 4px;
+        left: 21px;
+        width: 34px;
+
+    }
+    i.eq-mini-icon-ul-user {
+        width: 100%;
+        font-size: 2rem !important;
+        margin-top: 0.25rem;
+    }
+    i.eq-mini-icon-repair {
+        left: 21px;
+        width: 34px;
+        font-size: 1rem !important;
+        margin-top: 0.25rem;
+    }
+    i.eq-mini-icon-invoice {
+        font-size: 1rem !important;
+        top: 13px;
+        left: 8px;
+        width: 34px;
+        height: 34px;
+    }
+
+}
+
+.app-sidebar .app-sidebar-menu > li:hover > a {
+    background-color: #bdbdbd;
+
+    div.eq_new_icons {
+        color: initial;
+    }
+}
+
+@media (max-width: 991px) {
+    #app-sidebar {
+        display: none!important;
+    }
+}
+
+.eq_sidebar_title {
+    display:none;
+}
+
+@-moz-document url-prefix() {
+    .app-sidebar-panel:hover .eq_sidebar_title {
+        margin-top:-2px;
+    }
+}
+ /* Settings for general settings in lower sidebar */
+/*div.tab .o-app-icon {
+    margin: auto 25px auto 5px;
+    width: 10px;
+    text-align: center;
+}*/
+
+div.eq-mini-sidebar-icon {
+    margin: auto 25px auto 5px;
+    width: 20px;
+    /*height:20px;*/
+    text-align: center;
+}
+div.tab i.eq-mini-icon-or-icon {
+    display: block;
+    position: relative;
+    font-size: 1rem !important;
+    top: -27px;
+    left: 5px;
+}
+div.tab i.eq-mini-icon-ul-user {
+    width: 100%;
+    font-size: 2rem !important;
+    margin-top: 0.25rem;
+    display: block;
+    margin-top: 9px;
+}

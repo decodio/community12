@@ -1,0 +1,75 @@
+/* ---- Login-Styles and other basics for Frontend UI Improvements ---- */
+
+
+
+$global-basic-textcolor:#111111;
+
+$color-custom-color1: #333333; /* dark blue ownerp */
+$color-custom-color1-text: #ffffff;
+$color-custom-color1-text-highlight: darken($color-custom-color1-text, 20%);
+$color-custom-color1-highlight: darken(#999999, 35%) /*darken(@color-custom-color1, 10%)*/;
+
+
+$color-custom-color2: #999999;
+$color-custom-color2-text: #ffffff;
+$color-custom-color2-text-highlight: $color-custom-color2-text;
+$color-custom-color2-highlight: darken($color-custom-color2, 10%);
+
+$color-custom-links: $color-custom-color1;
+
+$navi-background: #ffffff; /*$color-custom-color1*/
+$navi-textcolor: $color-custom-color1;
+
+$panel-background: #DDDDDD;
+$panel-textcolor: $color-custom-color1;
+
+$table-row-color: #F0F0F0;
+
+$formcontrol-placeholder-color: #cccccc;
+$formcontrol-placeholder-style: italic; /*normal, italic, oblique*/
+$formcontrol-placeholder-align: left;
+
+
+div.o_database_list, .oe_login_form {
+    a {
+        color:$color-custom-color1;
+    }
+    .btn-primary {
+        color: #FFFFFF;
+        background-color: $color-custom-color1;
+        border-color: $color-custom-color1;
+    }
+    .btn-primary:hover,
+    .btn-primary:not(:disabled):not(.disabled):active,
+    .btn-primary:not(:disabled):not(.disabled).active,
+    .show > .btn-primary.dropdown-toggle {
+        background-color: lighten($color-custom-color1, 10%);
+        border-color: lighten($color-custom-color1, 10%);
+    }
+    .btn-primary:focus,
+    .btn-primary.focus {
+        box-shadow: 0 0 0 0.2rem lighten($color-custom-color1, 10%);
+    }
+
+    .btn-secondary {
+    color: #FFFFFF;
+    background-color: $color-custom-color2;
+    border-color: $color-custom-color2;
+    }
+    .btn-secondary:hover,
+    .btn-secondary:not(:disabled):not(.disabled):active,
+    .btn-secondary:not(:disabled):not(.disabled).active,
+    .show > .btn-secondary.dropdown-toggle {
+        background-color: darken($color-custom-color2, 10%);
+        border-color: darken($color-custom-color2, 10%);
+    }
+    .btn-secondary:focus,
+    .btn-secondary.focus {
+        box-shadow: 0 0 0 0.2rem darken($color-custom-color2, 10%);
+    }
+
+    .form-control:focus {
+        border-color: darken($color-custom-color2, 10%);
+        box-shadow: 0 0 0 0.2rem darken($color-custom-color2, 10%);
+    }
+}
