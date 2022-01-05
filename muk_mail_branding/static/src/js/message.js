@@ -2,7 +2,7 @@
 *
 *    Copyright (c) 2017-2019 MuK IT GmbH.
 *
-*    This file is part of MuK QMS Documents 
+*    This file is part of MuK Web Branding 
 *    (see https://mukit.at).
 *
 *    This program is free software: you can redistribute it and/or modify
@@ -20,27 +20,24 @@
 *
 **********************************************************************************/
 
-odoo.define('muk_quality_docs.DocumentListController', function (require) {
+odoo.define('muk_web_branding.model.Message', function (require) {
 "use strict";
 
 var core = require('web.core');
 var session = require('web.session');
 
-var ListController = require('web.ListController');
+var Message = require('mail.model.Message');
 
 var _t = core._t;
 var QWeb = core.qweb;
 
-var DocumentListController = ListController.extend({
-	custom_events: _.extend({}, ListController.prototype.custom_events, {
-		sidebar_action: '_sidebarAction',
-    }),
-    _sidebarAction: function(ev) {
-    	this.do_action(ev.data.action);
-    	ev.stopPropagation();
-    }
+Message.include({
+    _getAuthorName: function () {
+        if (this._isOdoobotAuthor()) {
+            return "Bot";
+        }
+        return this._super.apply(this, arguments);
+    },
 });
-
-return DocumentListController;
 
 });

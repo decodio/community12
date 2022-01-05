@@ -40,8 +40,17 @@ def _patch_system():
 #----------------------------------------------------------
 
 def _install_debrand_system(cr, registry):
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    for lang in env['res.lang'].search([('active','=',True)]).mapped('code'):
+        env['base.language.install'].create({
+            'lang': lang,
+            'overwrite': True
+        }).lang_install()
+        env['base.update.translations'].create({
+            'lang': lang
+        }).act_update()
+    env['ir.translation'].clear_caches()
     if version_info[5] != 'e':
-        env = api.Environment(cr, SUPERUSER_ID, {})
         env['ir.module.module'].search([('to_buy', '=', True)]).unlink()
         
 def _uninstall_rebrand_system(cr, registry):
