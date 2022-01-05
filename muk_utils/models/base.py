@@ -26,7 +26,6 @@ from odoo import api, models, fields
 from odoo.osv import expression
 
 from odoo.addons.muk_utils.tools import utils
-from odoo.exceptions import AccessError
 
 _logger = logging.getLogger(__name__)
 
@@ -51,7 +50,10 @@ class Base(models.AbstractModel):
     
     @api.model
     def _check_context_bin_size(self, field):
-        return any(key in self.env.context for key in ['bin_size', 'bin_size_%s' % (field)])
+        return any(
+            key in self.env.context and self.env.context[key] 
+            for key in ['bin_size', 'bin_size_%s' % (field)]
+        )
     
     #----------------------------------------------------------
     # Security
