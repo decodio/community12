@@ -19,7 +19,7 @@ class AccountAssetDepreciationLine(models.Model):
     def init(self):
         super(AccountAssetDepreciationLine, self).init()
         self._cr.execute("""
-            SELECT * FROM pg_proc WHERE proname = 'last' AND proisagg;""")
+            SELECT * FROM pg_proc WHERE proname = 'last' AND prokind = 'a';""")
         if not self._cr.fetchall():
             self._cr.execute("""
 -- Create a function that always returns the last non-NULL item
