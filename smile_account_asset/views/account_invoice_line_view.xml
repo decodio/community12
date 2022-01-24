@@ -13,7 +13,7 @@
                     <field name="account_id" groups="account.group_account_user"/>
                     <field name="asset_category_id"/>
                     <field name="name"/>
-                    <field name="uom_id" groups="product.group_uom"/>
+                    <field name="uom_id" groups="uom.group_uom"/>
                     <filter name="current_year" string="Current year" domain="[('create_date', '&gt;=', datetime.datetime.now().strftime('%%Y-01-01 00:00:00'))]" />
                     <separator />
                     <filter name="no_asset" string="No Asset" domain="[('asset_id','=',False)]"/>
@@ -111,7 +111,7 @@
                         <label for="quantity"/>
                         <div class="o_row">
                             <field name="quantity" readonly="1"/>
-                            <field name="uom_id" groups="product.group_uom" readonly="1" class="oe_inline"/>
+                            <field name="uom_id" groups="uom.group_uom" readonly="1" class="oe_inline"/>
                         </div>
                         <field name="price_unit" readonly="1"/>
                         <field name="account_id" readonly="1"/>
