@@ -23,6 +23,7 @@ from genshi.template.eval import StrictLookup
 
 from odoo import release as odoo_release
 from odoo import api, models, fields
+from odoo import tools as tools
 from odoo.tools import file_open, frozendict
 from odoo.tools.translate import _, translate
 from odoo.tools.misc import formatLang as odoo_fl
@@ -34,7 +35,8 @@ from odoo.exceptions import MissingError
 # for format_datetime
 from odoo.tools.misc import pycompat, DATE_LENGTH
 import babel.dates
-
+import pytz
+import datetime
 
 def format_datetime(env, value, lang_code=False, date_format=False):
     '''
@@ -52,7 +54,8 @@ def format_datetime(env, value, lang_code=False, date_format=False):
     '''
     if not value:
         return ''
-    if isinstance(value, pycompat.string_types):
+    #if isinstance(value, pycompat.string_types):
+    if isinstance(value, str):
         if len(value) < DATE_LENGTH:
             return ''
         if len(value) > DATE_LENGTH:
@@ -67,8 +70,8 @@ def format_datetime(env, value, lang_code=False, date_format=False):
     if not date_format:
         date_format = posix_to_ldml('%s %s' % (lang.date_format, lang.time_format), locale=locale)
 
-    return babel.dates.format_datetime(value, format=date_format, locale=locale)
-
+    #return babel.dates.format_datetime(value, format=date_format, locale=locale)
+    return babel.dates.format_datetime(value, format=date_format, locale=locale, tzinfo=tz)
 
 _logger = logging.getLogger(__name__)
 
@@ -308,9 +311,14 @@ class ReportAerooAbstract(models.AbstractModel):
         split the method in two (formatlang and format_date)
         """
         if date:
+            # we force the timezone of the user if the value is datetime
+            if isinstance(value, (datetime.datetime)):
+                value = value.astimezone(pytz.timezone(self.env.user.tz or 'UTC'))
             return odoo_fd(self.env, value, lang_code=lang_code, date_format=date_format)
         elif date_time:
-            return format_datetime(self.env, value, lang_code=lang_code, date_format=date_format)
+            #return format_datetime(self.env, value, lang_code=lang_code, date_format=date_format)
+            return format_datetime(self.env, value, lang_code=lang_code,
+                                   date_format=date_format, tz=self.env.user.tz)
         return odoo_fl(
             self.env, value, digits, grouping, monetary, dp, currency_obj)
 
@@ -377,10 +385,11 @@ class ReportAerooAbstract(models.AbstractModel):
             return self._asimage(base64.b64encode(img))
         self.localcontext = {
             'user':     self.env.user,
-            'user_lang': ctx.get('lang', False),
+            'user_lang': ctx.get('lang', self.env.user.lang),
             'data':     data,
 
-            'time':     time,
+            'time': time,
+            'datetime': datetime,
             'asarray':  self._asarray,
             'average':  self._average,
             'currency_to_text': self._currency_to_text,
@@ -400,6 +409,7 @@ class ReportAerooAbstract(models.AbstractModel):
             'fields':     fields,
             'company':     self.env.user.company_id,
             'barcode':     barcode,
+            'tools': tools,
         }
         self.localcontext.update(ctx)
         self._set_objects(self.model, docids)
@@ -540,7 +550,10 @@ class ReportAerooAbstract(models.AbstractModel):
             s = BytesIO()
             output.write(s)
             data = s.getvalue()
-            res = data, results[0][1], results[0][2]
+            # bug when trying to print multiple records.
+            # res = data, results[0][1], results[0][2]
+            res = self._context.get('return_filename') and\
+                (data, results[0][1], results[0][2]) or (data, results[0][1])
         else:
             res = self.assemble_tasks(docids, data, report, self._context)
         # TODO
