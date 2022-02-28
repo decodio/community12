@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+<record id="res_users_view_form" model="ir.ui.view">
+    <field name="model">res.users</field>
+    <field name="inherit_id" ref="base.view_users_form" />
+    <field name="arch" type="xml">
+        <group name="messaging" position="before">
+            <group name="support" string="Support">
+                <field name="internal_support" />
+            </group>
+        </group>
+    </field>
+</record>
+
+</odoo>
