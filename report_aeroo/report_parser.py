@@ -71,7 +71,9 @@ def format_datetime(env, value, lang_code=False, date_format=False):
         date_format = posix_to_ldml('%s %s' % (lang.date_format, lang.time_format), locale=locale)
 
     #return babel.dates.format_datetime(value, format=date_format, locale=locale)
-    return babel.dates.format_datetime(value, format=date_format, locale=locale, tzinfo=tz)
+    get_timezone_info = env.context.get('tz', None)
+    return babel.dates.format_datetime(value, format=date_format, locale=locale,
+                                       tzinfo=babel.dates.get_timezone(get_timezone_info))
 
 _logger = logging.getLogger(__name__)
 
