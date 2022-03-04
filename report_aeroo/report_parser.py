@@ -320,7 +320,7 @@ class ReportAerooAbstract(models.AbstractModel):
         elif date_time:
             #return format_datetime(self.env, value, lang_code=lang_code, date_format=date_format)
             return format_datetime(self.env, value, lang_code=lang_code,
-                                   date_format=date_format, tz=self.env.user.tz)
+                                   date_format=date_format)
         return odoo_fl(
             self.env, value, digits, grouping, monetary, dp, currency_obj)
 
