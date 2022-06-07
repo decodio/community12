@@ -1,2 +1,6 @@
-.o_list_view .o_data_cell.o_invisible_modifier{display:none !important}
-table.o_list_view .o_data_cell.o_invisible_modifier{display:none !important}
+/*Backport for Odoo12 version:
+   Override display: none to keep table cells aligned. Note: cannot use
+  'initial' as it will force them to 'inline', not 'table-cell'.
+*/
+.o_list_view .o_data_cell.o_invisible_modifier{display:table-cell!important}
+table.o_list_view .o_data_cell.o_invisible_modifier{display:table-cell!important}
