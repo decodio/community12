@@ -40,7 +40,7 @@ odoo.define("report_aeroo.report", function (require) {
             // }
 
             var blocked = !session.get_file({
-                url: url,
+                url: '/report/download',
                 data: {
                     data: JSON.stringify([url, type]),
                 },
